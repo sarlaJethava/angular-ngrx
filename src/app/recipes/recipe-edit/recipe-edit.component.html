@@ -1,0 +1,171 @@
+<div class="row">
+  <div class="col-sm-12">
+    <form [formGroup]="recipeForm" (ngSubmit)="recipeForm.valid && onSubmit()">
+      <div class="row">
+        <div class="col-sm-12">
+          <button
+            class="btn btn-primary"
+            type="submit"
+            [disabled]="recipeForm.invalid"
+          >
+            Save
+          </button>
+          <button class="btn btn-danger" type="button" (click)="onCancel()">
+            Cancel
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label>Recipe Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              formControlName="name"
+            />
+            <span
+              class="help-block"
+              *ngIf="
+                recipeForm.get('name').touched &&
+                recipeForm.get('name').invalid &&
+                recipeForm.get('name').errors.required
+              "
+              >Name is required!</span
+            >
+            <span
+              class="help-block"
+              *ngIf="
+                recipeForm.get('name').touched &&
+                recipeForm.get('name').invalid &&
+                recipeForm.get('name').errors.maxLength
+              "
+              >maximum length should be 10</span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label>Image Path</label>
+            <input
+              type="text"
+              class="form-control"
+              id="Image"
+              formControlName="imagePath"
+              #image
+            />
+            <span
+              class="help-block"
+              *ngIf="
+                recipeForm.get('imagePath').touched &&
+                recipeForm.get('imagePath').invalid &&
+                recipeForm.get('imagePath').errors.required
+              "
+              >Image Path is required!</span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <img
+            [src]="image.value"
+            alt="Recipe"
+            class="img-responsive"
+            style="max-height: 350px;"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label>Description</label>
+            <textarea
+              id="description"
+              class="form-control"
+              formControlName="description"
+              rows="6"
+            ></textarea>
+            <span
+              class="help-block"
+              *ngIf="
+                recipeForm.get('description').touched &&
+                recipeForm.get('description').invalid &&
+                recipeForm.get('description').errors.required
+              "
+              >Description is required!</span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12" formArrayName="ingredients">
+          <div
+            class="row"
+            *ngFor="let ingradientCtrl of getIngradientControl(); let i = index"
+            style="margin-top: 10px;"
+            [formGroupName]="i"
+          >
+            <div class="col-sm-8">
+              <input type="text" class="form-control" formControlName="name" />
+              <span
+                class="help-block"
+                *ngIf="
+                  ingradientCtrl.get('name').touched &&
+                  ingradientCtrl.get('name').invalid &&
+                  ingradientCtrl.get('name').errors.required
+                "
+                >Ingredient name is required!</span
+              >
+            </div>
+            <div class="col-sm-2">
+              <input
+                type="number"
+                class="form-control"
+                formControlName="amount"
+              />
+              <span
+                class="help-block"
+                *ngIf="
+                  ingradientCtrl.get('amount').touched &&
+                  ingradientCtrl.get('amount').invalid &&
+                  ingradientCtrl.get('amount').errors.required
+                "
+                >Amount is required!</span
+              >
+              <span
+                class="help-block"
+                *ngIf="
+                  ingradientCtrl.get('amount').touched &&
+                  ingradientCtrl.get('amount').invalid &&
+                  ingradientCtrl.get('amount').errors.pattern
+                "
+                >plaese enter valid amount!</span
+              >
+            </div>
+            <div class="col-sm-1">
+              <button
+                class="btn btn-danger"
+                (click)="onIngredientRemove()"
+                type="button"
+              >
+                X
+              </button>
+            </div>
+          </div>
+          <hr />
+          <button
+            class="btn btn-primary"
+            type="button"
+            (click)="onAddIngredient()"
+          >
+            Add Ingredient
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

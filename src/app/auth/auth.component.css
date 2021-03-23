@@ -1,0 +1,6 @@
+.help-block {
+  color: rgb(223, 123, 123);
+}
+input.ng-touched.ng-invalid {
+  border: 1px sold red;
+}

@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Recipe Book</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active" *ngIf="isAuthenticated">
+        <a class="nav-link" href="#" routerLink="/recipe"
+          >Recipies <span class="sr-only">(current)</span></a
+        >
+      </li>
+      <li class="nav-item" routerLinkActive="active" *ngIf="!isAuthenticated">
+        <a class="nav-link" href="#" routerLink="/auth">Authenicate</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" href="#" routerLink="/shopping-list"
+          >Shopping List</a
+        >
+      </li>
+    </ul>
+
+    <div class="dropdown nav navbar-nav navbar-right" *ngIf="isAuthenticated">
+      <li class="nav-item">
+        <a class="nav-link" style="cursor: pointer;" (click) = "onLogout()">Logout</a>
+      </li>
+
+      <button
+        class="btn btn-primary dropdown-toggle"
+        type="button"
+        data-toggle="dropdown"
+        appDropdown
+      >
+        Manage <span class="caret"></span>
+      </button>
+
+      <ul class="dropdown-menu">
+        <li>
+          <a (click)="onSaveData()" style="cursor: pointer;">Save Data</a>
+        </li>
+        <li>
+          <a style="cursor: pointer;" (click)="onFetchData()">Fetch Data</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

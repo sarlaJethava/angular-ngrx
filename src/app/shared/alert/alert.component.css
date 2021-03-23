@@ -1,0 +1,24 @@
+.back-tick {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 50;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.alert-box {
+  position: fixed;
+  width: 60vw;
+  top: 30vh;
+  left: 20vw;
+  padding: 16px;
+  z-index: 100;
+  box-shadow: 0, 2px, 8px, rgba(0, 0, 0, 0.26);
+  background-color: white;
+}
+
+.alert-box-actions {
+  text-align: center;
+}
